@@ -11,7 +11,7 @@ import Header from './components/Header';
 
 const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
-
+const DashboardLazy = lazy(()=> import('./components/DashboardApp'));
 const generateClassName = createGenerateClassName({
   productionPrefix: 'co',
 });
@@ -23,8 +23,8 @@ export default () => {
 
   useEffect(() => {
     if (isSignedIn) {
-      //history.push('/dashboard');
-      console.log("dashboard is here")
+      history.push('/dashboard');
+      //console.log("dashboard is here")
     }
   }, [isSignedIn]);
 
@@ -41,9 +41,9 @@ export default () => {
               <Route path="/auth">
                 <AuthLazy onSignIn={() => setIsSignedIn(true)} />
               </Route>
-              <Route path="/dashboard">
+              <Route path="/dashboard" >
                 {!isSignedIn && <Redirect to="/" />}
-                {/* <DashboardLazy /> */}
+                <DashboardLazy />
               </Route>
               <Route path="/" component={MarketingLazy} />
             </Switch>
